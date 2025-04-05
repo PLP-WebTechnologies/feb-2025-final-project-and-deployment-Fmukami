@@ -85,3 +85,160 @@
             background-color: #f8f9fa;
             padding: 2rem;
             border-radius: 8px;
+        }
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .contact-form label {
+            display: block;
+            margin-top: 1rem;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .contact-form button {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #FF6347; /* Tomato color for buttons */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .contact-form button:hover {
+            background-color: #FF4500; /* Darker tomato on hover */
+        }
+        .error-message {
+            color: red;
+            margin-top: 0.5rem;
+        }
+        .image-slider {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 8px;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            transition: opacity 0.5s ease;
+        }
+        .slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .slide.active {
+            display: block;
+            opacity: 1;
+        }
+        .slider-nav {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .slider-nav button {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .slider-nav button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        .slider-nav button.active {
+            background-color: #FF6347; /* Tomato color for active button */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>My Website</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="home-section">
+                <h2>Welcome to the Home Page</h2>
+                <p>This is the main page of our website. It provides an overview of what we offer. We hope you find it informative and easy to navigate. Feel free to click the About and Contact links above.</p>
+                <div class="image-slider">
+                    <div class="slide active">
+                        <img src="https://via.placeholder.com/600x400/FF6347/FFFFFF?text=Image+1" alt="Image 1">
+                    </div>
+                    <div class="slide">
+                        <img src="https://via.placeholder.com/600x400/FF6347/FFFFFF?text=Image+2" alt="Image 2">
+                    </div>
+                    <div class="slide">
+                        <img src="https://via.placeholder.com/600x400/FF6347/FFFFFF?text=Image+3" alt="Image 3">
+                    </div>
+                    <div class="slider-nav">
+                        <button data-slide="0" class="active"></button>
+                        <button data-slide="1"></button>
+                        <button data-slide="2"></button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 My Website. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        const slider = document.querySelector('.image-slider');
+        const slides = document.querySelectorAll('.slide');
+        const navButtons = document.querySelectorAll('.slider-nav button');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            navButtons.forEach(button => button.classList.remove('active'));
+            slides[index].classList.add('active');
+            navButtons[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        let slideInterval = setInterval(nextSlide, 3000);
+
+        navButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                showSlide(index);
+                slideInterval = setInterval(nextSlide, 3000);
+            });
+        });
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
